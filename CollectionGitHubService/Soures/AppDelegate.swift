@@ -25,7 +25,7 @@ extension AppDelegate {
     private func setupKeyWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
-        let allUserViewController = ProvideObject.allUser.viewController
+        let allUserViewController = Navigator.allUser.viewController
         window?.rootViewController = UINavigationController(rootViewController: allUserViewController)
         window?.makeKeyAndVisible()
     }

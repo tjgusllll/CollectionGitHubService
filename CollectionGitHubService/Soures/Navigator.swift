@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum ProvideObject {
+enum Navigator {
     case allUser
     case detailUser(name: String)
 }
 
-extension ProvideObject {
+extension Navigator {
     var viewController: UIViewController {
         switch self {
         case .allUser:

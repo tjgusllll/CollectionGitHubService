@@ -12,7 +12,7 @@
 		C375A0BC228B430700539EC4 /* AllUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375A0BB228B430700539EC4 /* AllUserViewController.swift */; };
 		C375A0C1228B430A00539EC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C375A0C0228B430A00539EC4 /* Assets.xcassets */; };
 		C375A0C4228B430A00539EC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C375A0C2228B430A00539EC4 /* LaunchScreen.storyboard */; };
-		C375A0D5228B442100539EC4 /* ProvideObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375A0D4228B442100539EC4 /* ProvideObject.swift */; };
+		C375A0D5228B442100539EC4 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375A0D4228B442100539EC4 /* Navigator.swift */; };
 		C375A0D7228B444200539EC4 /* AllUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375A0D6228B444200539EC4 /* AllUserCell.swift */; };
 		C375A0D9228B445300539EC4 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375A0D8228B445300539EC4 /* UserDetailViewController.swift */; };
 		C375A0DB228B445F00539EC4 /* UserDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375A0DA228B445F00539EC4 /* UserDetailCell.swift */; };
@@ -36,7 +36,7 @@
 		C375A0C0228B430A00539EC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C375A0C3228B430A00539EC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C375A0C5228B430A00539EC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C375A0D4228B442100539EC4 /* ProvideObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvideObject.swift; sourceTree = "<group>"; };
+		C375A0D4228B442100539EC4 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		C375A0D6228B444200539EC4 /* AllUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUserCell.swift; sourceTree = "<group>"; };
 		C375A0D8228B445300539EC4 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		C375A0DA228B445F00539EC4 /* UserDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailCell.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				C375A0B9228B430700539EC4 /* AppDelegate.swift */,
-				C375A0D4228B442100539EC4 /* ProvideObject.swift */,
+				C375A0D4228B442100539EC4 /* Navigator.swift */,
 				C375A0D0228B43E900539EC4 /* AllUser */,
 				C375A0CF228B43E200539EC4 /* UserDetail */,
 				C375A0CE228B43DE00539EC4 /* Model */,
@@ -319,7 +319,7 @@
 				C375A0DD228B447000539EC4 /* UserRepositoryCell.swift in Sources */,
 				C375A0E1228B448D00539EC4 /* UserDetailModel.swift in Sources */,
 				C375A0E7228B44B500539EC4 /* GitHubService.swift in Sources */,
-				C375A0D5228B442100539EC4 /* ProvideObject.swift in Sources */,
+				C375A0D5228B442100539EC4 /* Navigator.swift in Sources */,
 				C375A0EB228B44C800539EC4 /* ServiceError.swift in Sources */,
 				C375A0E9228B44BE00539EC4 /* Router.swift in Sources */,
 			);

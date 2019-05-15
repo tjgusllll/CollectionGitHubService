@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UsesrDetailModel: Codable {
+struct UserDetailModel: Codable {
     var avatar_url : URL?
     var login: String?
     var name: String?

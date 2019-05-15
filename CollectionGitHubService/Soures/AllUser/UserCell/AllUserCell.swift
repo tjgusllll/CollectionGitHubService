@@ -66,7 +66,7 @@ final class AllUserCell: UICollectionViewCell{
             make.top.equalTo(UI.basicMargin)
             make.leading.equalTo(UI.basicMargin)
             make.trailing.equalTo(-UI.basicMargin)
-            //make.size.greaterThanOrEqualTo(CGSize(width: UI.itemmageSize, height: UI.itemImageSize))
+            make.height.equalTo(userImageView.snp.width)
         }
         
         loginLabel.snp.makeConstraints { make in

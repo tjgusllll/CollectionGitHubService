@@ -10,6 +10,8 @@ import Alamofire
 
 enum Router: URLRequestConvertible {
     case userAll(since: Int)
+    case userDetail(name: String)
+    case userRepos(name: String, page: Int)
     
     static let baseURL = "https://api.github.com"
     
@@ -18,6 +20,10 @@ enum Router: URLRequestConvertible {
         switch self {
         case .userAll:
             return .get
+        case .userDetail:
+            return .get
+        case .userRepos:
+            return .get
         }
     }
     
@@ -25,6 +31,10 @@ enum Router: URLRequestConvertible {
         switch self {
         case .userAll(_):
             return "/users"
+        case .userDetail(let name):
+            return "/users/\(name)"
+        case .userRepos(let name, _):
+            return "/users/\(name)/repos"
         }
     }
     
@@ -38,6 +48,11 @@ enum Router: URLRequestConvertible {
         switch self {
         case .userAll(let since):
             let params: Parameters = ["since":since]
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: params)
+        case .userDetail(_):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
+        case .userRepos(_ ,let page):
+            let params: Parameters = ["page":page]
             urlRequest = try URLEncoding.default.encode(urlRequest, with: params)
         default:
             break

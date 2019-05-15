@@ -11,11 +11,14 @@ import SnapKit
 
 class AllUserViewController: UIViewController {
     
-    //MARK:- UI Properties
+    //MARK:- UI Constant
     
     struct UI {
         static let basicMargin: CGFloat = 10
     }
+    
+    
+    //MARK:- UI Properties
     
     var collectionview: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,7 +36,10 @@ class AllUserViewController: UIViewController {
     let githubService = GitHubService()
     //pagination
     var pageArr: [UserModel] = []
-    let limit: Int = 20
+    enum Pagenation: Int {
+        case pagelimit = 20
+        case pageFirstLoad = 0
+    }
     
     
     override func viewDidLoad() {
@@ -61,11 +67,11 @@ class AllUserViewController: UIViewController {
         }
         
         //getAllUserList
-        githubGetAll(since: 0)
+        githubGetAll(since: Pagenation.pageFirstLoad.rawValue)
     }
     
     func githubGetAll(since: Int) {
-        githubService.requestGitHubSericeAllUser(since: since) { result in
+        githubService.requestGitHubAllUser(since: since) { result in
             switch result {
             case .success(let response):
                 self.resetUserList(response)
@@ -78,7 +84,7 @@ class AllUserViewController: UIViewController {
     //response pagination
     func resetUserList(_ response: [UserModel]) {
         users = response
-        for i in 0..<limit {
+        for i in 0..<Pagenation.pagelimit.rawValue {
             pageArr.append(users[i])
         }
         
@@ -119,7 +125,7 @@ extension AllUserViewController: UICollectionViewDataSource, UICollectionViewDel
     //MARK:- DetailUser Navigation
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let userName = self.pageArr[indexPath.row].login else { return }
-        let detailVC = ProvideObject.detailUser(name:userName).viewController
+        let detailVC = Navigator.detailUser(name:userName).viewController
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

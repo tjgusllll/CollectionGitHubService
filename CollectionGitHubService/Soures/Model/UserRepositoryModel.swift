@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UserRepositoryModel {
+struct UserRepositoryModel: Codable {
     var name: String?
     var description: String?
     var stargazers_count: Int?

@@ -29,17 +29,25 @@ class AllUserViewController: UIViewController {
         return collectionview
     }()
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     
     //MARK:- Properties
     
     var users: [UserModel] = []
     let githubService = GitHubService()
+    
     //pagination
     var pageArr: [UserModel] = []
     enum Pagenation: Int {
         case pagelimit = 20
         case pageFirstLoad = 0
     }
+    
+    //searchController
+    var searchResult: [UserModel] = []
+    
+    
     
     
     override func viewDidLoad() {
@@ -49,9 +57,17 @@ class AllUserViewController: UIViewController {
     
     func setupUI() {
         //Navigation LargeTitle UI
-        self.title = "GitHubService"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
+        //self.title = "GitHubService"
+        //navigationController?.navigationBar.prefersLargeTitles = true
+        //navigationItem.largeTitleDisplayMode = .always
+        
+        
+        searchController.searchResultsUpdater = self
+        self.definesPresentationContext = true
+        self.navigationItem.titleView = searchController.searchBar
+        searchController.searchBar.placeholder = "Search Name"
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         
         //CollectionView
         collectionview.dataSource = self
@@ -99,18 +115,22 @@ class AllUserViewController: UIViewController {
         githubGetAll(since: lastID)
     }
     
-    
 }
 
 
 extension AllUserViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.pageArr.count
+        //return searchController.searchBar.text != "" ? searchResult.count : self.pageArr.count
+        return searchController.isActive ? searchResult.count : self.pageArr.count
+        //return self.pageArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //let userdata = searchController.searchBar.text != "" ? searchResult[indexPath.row] : pageArr[indexPath.row]
+        let userdata = searchController.isActive ? searchResult[indexPath.row] : pageArr[indexPath.row]
         let cell = collectionview.dequeueReusableCell(withReuseIdentifier: "AllUserCell", for: indexPath) as! AllUserCell
-        cell.configure(with: pageArr[indexPath.row])
+        //cell.configure(with: pageArr[indexPath.row])
+        cell.configure(with: userdata)
         return cell
     }
     
@@ -124,7 +144,8 @@ extension AllUserViewController: UICollectionViewDataSource, UICollectionViewDel
     
     //MARK:- DetailUser Navigation
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let userName = self.pageArr[indexPath.row].login else { return }
+        let userdata = searchController.isActive ? searchResult[indexPath.row] : pageArr[indexPath.row]
+        guard let userName = userdata.login else { return }
         let detailVC = Navigator.detailUser(name:userName).viewController
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -139,3 +160,22 @@ extension AllUserViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellwidth, height: cellheight )
     }
 }
+
+
+extension AllUserViewController: UISearchResultsUpdating {
+    //MARK:- UISearchUpdating Method
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContent(for: searchText)
+            collectionview.reloadData()
+        }
+    }
+    
+    func filterContent(for searchText: String) {
+        searchResult = pageArr.filter({ (UserModel) -> Bool in
+            let match = UserModel.login?.range(of: searchText, options: .caseInsensitive)
+            return match != nil
+        })
+    }
+}
+

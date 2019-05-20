@@ -36,14 +36,12 @@ class AllUserViewController: UIViewController {
     
     var users: [UserModel] = []
     let githubService = GitHubService()
-    
     //pagination
     var pageArr: [UserModel] = []
     enum Pagenation: Int {
         case pagelimit = 20
         case pageFirstLoad = 0
     }
-    
     //searchController
     var searchResult: [UserModel] = []
     
@@ -56,12 +54,7 @@ class AllUserViewController: UIViewController {
     }
     
     func setupUI() {
-        //Navigation LargeTitle UI
-        //self.title = "GitHubService"
-        //navigationController?.navigationBar.prefersLargeTitles = true
-        //navigationItem.largeTitleDisplayMode = .always
-        
-        
+        //searchController
         searchController.searchResultsUpdater = self
         self.definesPresentationContext = true
         self.navigationItem.titleView = searchController.searchBar
@@ -120,13 +113,10 @@ class AllUserViewController: UIViewController {
 
 extension AllUserViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return searchController.searchBar.text != "" ? searchResult.count : self.pageArr.count
         return searchController.isActive ? searchResult.count : self.pageArr.count
-        //return self.pageArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //let userdata = searchController.searchBar.text != "" ? searchResult[indexPath.row] : pageArr[indexPath.row]
         let userdata = searchController.isActive ? searchResult[indexPath.row] : pageArr[indexPath.row]
         let cell = collectionview.dequeueReusableCell(withReuseIdentifier: "AllUserCell", for: indexPath) as! AllUserCell
         //cell.configure(with: pageArr[indexPath.row])
